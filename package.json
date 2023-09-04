@@ -11,7 +11,13 @@
     ".": "./dist/src/index.js",
     "./paltas-note.js": "./dist/src/paltas-note.js"
   },
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
+    "dev": "vite dev --host",
+    "build:vite": "vite build",
     "analyze": "cem analyze --litelement",
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
     "build": "tsc && npm run analyze -- --exclude dist",
@@ -39,7 +45,8 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.4.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "vite": "^4.4.9"
   },
   "customElements": "custom-elements.json",
   "eslintConfig": {
