@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #fafafa;
+    }
+
+    table {
+      padding: 20px;
+      border-spacing: 0 15px;
+    }
+
+    tr {
+      padding: 100px;
+    }
+
+    td {
+      min-width: 100px;
+      text-align: center;
+    }
+
+    td>span {
+      background: transparent;
+      border-radius: 50%;
+      height: 10px;
+      font-family: sans-serif;
+      border-bottom: 2px solid red;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="demo"></div>
+
+  <script type="module">
+    import { html, render } from 'lit';
+    import '../dist/src/paltas-note.js';
+
+    const header = 'Hello owc World!';
+    render(
+      html`
+        <paltas-note vibhags="1 2 0 3">
+          Dha Dhin Dhin Dha
+          Dha Dhin Dhin Dha
+          Dha Tin Tin Ta
+          Ta Dhin Dhin Dha
+        </paltas-note>
+
+        <paltas-note vibhags="0 1 2">
+          Tin Tin Na
+          Dhin Na
+          Dhin Na
+        </paltas-note>
+      `,
+      document.querySelector('#demo')
+    );
+  </script>
+
+
+</body>
+
+</html>
