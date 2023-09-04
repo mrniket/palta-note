@@ -1,15 +1,15 @@
 {
-  "name": "paltas-note",
-  "description": "Webcomponent paltas-note following open-wc recommendations",
+  "name": "palta-note",
+  "description": "Webcomponent palta-note following open-wc recommendations",
   "license": "MIT",
-  "author": "paltas-note",
-  "version": "0.1.1",
+  "author": "palta-note",
+  "version": "0.2.0",
   "type": "module",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
-    "./paltas-note.js": "./dist/src/paltas-note.js"
+    "./palta-note.js": "./dist/src/palta-note.js"
   },
   "files": [
     "dist",
@@ -25,9 +25,7 @@
     "test": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\""
   },
-  "dependencies": {
-    "lit": "^2.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",
     "@open-wc/eslint-config": "^9.2.1",
