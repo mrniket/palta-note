@@ -16,11 +16,9 @@
     "types"
   ],
   "scripts": {
-    "dev": "vite dev --host",
-    "build:vite": "vite build",
     "analyze": "cem analyze --litelement",
-    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
-    "build": "tsc && npm run analyze -- --exclude dist",
+    "start": "tsc --noEmit && vite dev --host",
+    "build": "tsc --noEmit && npm run analyze -- --exclude dist && vite build",
     "prepublish": "tsc && npm run analyze -- --exclude dist",
     "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
