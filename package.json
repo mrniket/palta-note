@@ -3,17 +3,16 @@
   "description": "Webcomponent palta-note following open-wc recommendations",
   "license": "MIT",
   "author": "palta-note",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
-  "main": "dist/src/index.js",
-  "module": "dist/src/index.js",
+  "module": "./dist/palta-note.js",
   "exports": {
-    ".": "./dist/src/index.js",
-    "./palta-note.js": "./dist/src/palta-note.js"
+    ".": {
+      "import": "./dist/palta-note.js"
+    }
   },
   "files": [
-    "dist",
-    "types"
+    "dist"
   ],
   "scripts": {
     "analyze": "cem analyze --litelement",
