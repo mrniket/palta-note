@@ -1,6 +1,6 @@
 # \<palta-note>
 
-<palta-note> is a web component that displays compositions Bhatkhande notation system.
+\<palta-note> is a web component that displays compositions Bhatkhande notation system.
 
 ## Installation
 
