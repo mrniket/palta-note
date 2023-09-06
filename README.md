@@ -23,6 +23,10 @@ npm i palta-note
 </palta-note>
 ```
 
+The above should transform into:
+
+![Screenshot of palta-note in action](./docs/screenshot.png)
+
 ## Linting and formatting
 
 To scan the project for linting and formatting errors, run
