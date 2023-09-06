@@ -3,7 +3,7 @@
   "description": "Webcomponent palta-note following open-wc recommendations",
   "license": "MIT",
   "author": "palta-note",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "type": "module",
   "types": "./dist/src/index.d.ts",
   "files": [
