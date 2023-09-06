@@ -37,28 +37,28 @@
   <div id="demo"></div>
 
   <script type="module">
-    import { html, render } from 'lit';
-    import './src/paltas-note.ts';
-
-    const header = 'Hello owc World!';
-    render(
-      html`
-        <paltas-note vibhags="1 2 0 3">
-          Dha Dhin Dhin Dha
-          Dha Dhin Dhin Dha
-          Dha Tin Tin Ta
-          Ta Dhin Dhin Dha
-        </paltas-note>
-
-        <paltas-note vibhags="0 1 2">
-          Tin Tin Na
-          Dhin Na
-          Dhin Na
-        </paltas-note>
-      `,
-      document.querySelector('#demo')
-    );
+    import './src/palta-note.ts';
   </script>
+
+  <palta-note vibhags="1 2 0 3">
+    Dha Dhin Dhin Dha
+    Dha Dhin Dhin Dha
+    Dha Tin Tin Ta
+    Ta Dhin Dhin Dha
+  </palta-note>
+
+  <palta-note vibhags="0 1 2">
+    Tin Tin Na
+    Dhin Na
+    Dhin Na
+  </palta-note>
+
+  <div style="padding: 25; background-color: black;">
+    <palta-note vibhags="0 1 2">
+      Dha Dhin Dhin
+    </palta-note>
+  </div>
+
 
 
 </body>

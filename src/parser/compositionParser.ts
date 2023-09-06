@@ -1,4 +1,4 @@
-type Matra = { matra: string; number: number }
+export type Matra = { matra: string; number: number }
 
 export function parse(composition: string): Array<Array<Matra>> {
   const matras = composition
@@ -6,16 +6,16 @@ export function parse(composition: string): Array<Array<Matra>> {
     .split('\n')
     .map(line => line.trim().split(' '))
 
-  let result = []
+  const result = []
   let matraCounter = 1
 
-  for (let i = 0; i < matras.length; i++) {
+  for (let i = 0; i < matras.length; i += 1) {
     const matraRow = []
-    for (let j = 0; j < matras[i].length; j++) {
+    for (let j = 0; j < matras[i].length; j += 1) {
       const matra = matras[i][j]
       if (matra !== '') {
         matraRow.push({ matra, number: matraCounter })
-        matraCounter++
+        matraCounter += 1
       }
     }
     result.push(matraRow)
@@ -26,10 +26,7 @@ export function parse(composition: string): Array<Array<Matra>> {
 
 export function parseVibhags(
   vibhags: string | undefined
-): Array<number> | undefined {
+): Array<string> | undefined {
   if (!vibhags) return undefined
-  return vibhags
-    .trim()
-    .split(' ')
-    .map(vibhag => parseInt(vibhag))
+  return vibhags.trim().split(' ')
 }

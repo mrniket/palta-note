@@ -1,21 +1,26 @@
-# \<paltas-note>
+# \<palta-note>
 
-This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+<palta-note> is a web component that displays compositions Bhatkhande notation system.
 
 ## Installation
 
 ```bash
-npm i paltas-note
+npm i palta-note
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import 'paltas-note/paltas-note.js';
+  import 'palta-note/palta-note.js';
 </script>
 
-<paltas-note></paltas-note>
+<palta-note vibhags="X 2 0 3">
+  Dha Dhin Dhin Dha
+  Dha Dhin Dhin Dha
+  Dha Tin Tin Ta
+  Ta Dhin Dhin Dha
+</palta-note>
 ```
 
 ## Linting and formatting
@@ -46,17 +51,10 @@ To run the tests in interactive watch mode run:
 npm run test:watch
 ```
 
-
-## Tooling configs
-
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
-
-If you customize the configuration a lot, you can consider moving them to individual files.
-
-## Local Demo with `web-dev-server`
+## Local Demo
 
 ```bash
 npm start
 ```
 
-To run a local development server that serves the basic demo located in `demo/index.html`
+To run a local development server that serves the basic demo located in `index.html`

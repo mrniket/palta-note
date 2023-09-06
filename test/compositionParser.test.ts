@@ -62,7 +62,7 @@ describe('CompositionParser', () => {
 
   it('should parse vibhags', async () => {
     const vibhags = '1 2 0 3'
-    const expected = [1, 2, 0, 3]
+    const expected = ['1', '2', '0', '3']
     const result = parseVibhags(vibhags)
     expect(result).to.deep.equal(expected)
   })

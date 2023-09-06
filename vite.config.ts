@@ -1,4 +1,6 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 
@@ -6,10 +8,15 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/paltas-note.ts',
-      formats: ['es'],
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'PaltaNote',
+      fileName: format => `palta-note.${format}.js`,
     },
     minify: false,
+    rollupOptions: {
+      external: [],
+      plugins: [dts()],
+    },
     // rollupOptions: {
     //   external: /^lit/,
     // },

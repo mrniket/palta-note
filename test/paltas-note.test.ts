@@ -1,36 +1,34 @@
-import { html } from 'lit'
 import { fixture, expect } from '@open-wc/testing'
-import { PaltasNote } from '../src/PaltasNote.js'
-import '../src/paltas-note.js'
+import { PaltaNote } from '../src/PaltaNote'
 
-describe('PaltasNote', () => {
+describe('PaltaNote', () => {
+  customElements.define('palta-note', PaltaNote)
+
   it('passes the a11y audit', async () => {
-    const el = await fixture<PaltasNote>(
-      html`<paltas-note>Dha Dhin Dhin Dha</paltas-note>`
+    const el = await fixture<PaltaNote>(
+      `<palta-note>Dha Dhin Dhin Dha</palta-note>`
     )
-
     await expect(el).shadowDom.to.be.accessible()
   })
 
   it('should render the composition as a table', async () => {
-    const el = await fixture<PaltasNote>(
-      html`<paltas-note>Dha Dhin Dhin Dha</paltas-note>`
+    const element = await fixture<PaltaNote>(
+      '<palta-note>Dha Dhin Dhin Dha</palta-note>'
     )
-
-    const table = el.shadowRoot?.querySelector('table')
+    const table = element.shadowRoot?.querySelector('table')
     expect(table).to.exist
   })
 
   it('should render the composition with vibhag markers', async () => {
-    const el = await fixture<PaltasNote>(
+    const el = await fixture<PaltaNote>(
       // prettier-ignore
-      html`<paltas-note vibhags="1 2 0 3">
+      `<palta-note vibhags="X 2 0 3">
         Dha Dhin Dhin Dha
         Dha Dhin Dhin Dha
         Dha Tin Tin Ta
         Ta Dhin Dhin Dha
         Dha Dhin Dhin Dha
-      </paltas-note>`
+      </palta-note>`
     )
 
     const vibhagMarkers = el.shadowRoot?.querySelectorAll('th')
@@ -38,6 +36,6 @@ describe('PaltasNote', () => {
       Array.from(vibhagMarkers || []).map(
         vibhagMarker => vibhagMarker.textContent
       )
-    ).to.deep.equal(['1', '2', '0', '3', '1'])
+    ).to.deep.equal(['X', '2', '0', '3', 'X'])
   })
 })
