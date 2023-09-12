@@ -15,7 +15,7 @@ npm i palta-note
   import 'palta-note/palta-note.js';
 </script>
 
-<palta-note vibhags="X 2 0 3">
+<palta-note vibhags="1 2 0 3">
   Dha Dhin Dhin Dha
   Dha Dhin Dhin Dha
   Dha Tin Tin Ta

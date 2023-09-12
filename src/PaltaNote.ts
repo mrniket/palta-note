@@ -6,6 +6,7 @@ const rawStyles = `
   display: block;
   color: black;
   font-family: sans-serif;
+  font-size: 1.2em;
   filter: invert(1);
   mix-blend-mode: difference;
 }
@@ -21,10 +22,11 @@ tr {
 th {
   vertical-align: baseline;
   font-family: 'Caveat', sans-serif;
+  padding-right: 1em;
 }
 
 td {
-  min-width: 100px;
+  min-width: 80px;
   text-align: center;
 }
 
@@ -43,7 +45,7 @@ td > div {
   position: relative;
   left: 0;
   right: 10px;
-  top: -0.5em;
+  top: -0.3em;
   width: 70%;
   height: 10px;
   border-radius: 50%;
