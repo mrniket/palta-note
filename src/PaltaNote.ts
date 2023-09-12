@@ -12,7 +12,7 @@ const rawStyles = `
 }
 
 table {
-  border-spacing: 0 15px;
+  border-spacing: 1em 15px;
 }
 
 tr {
@@ -26,7 +26,7 @@ th {
 }
 
 td {
-  min-width: 80px;
+  min-width: 50px;
   text-align: center;
 }
 

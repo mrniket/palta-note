@@ -74,20 +74,20 @@ describe('CompositionParser', () => {
       ],
       [
         { matra: 'Dha', number: 5 },
-        { matra: '-', number: 6 },
+        { matra: '–', number: 6 },
         { matra: 'Dhin', number: 7 },
         { matra: 'Dha', number: 8 },
       ],
       [
         { matra: 'Dha', number: 9 },
         { matra: 'Tin', number: 10 },
-        { matra: '-', number: 11 },
+        { matra: '–', number: 11 },
         { matra: 'Ta', number: 12 },
       ],
       [
         { matra: 'Ta', number: 13 },
         { matra: 'Dhin', number: 14 },
-        { matra: '-', number: 15 },
+        { matra: '–', number: 15 },
         { matra: 'Dha', number: 16 },
       ],
     ]

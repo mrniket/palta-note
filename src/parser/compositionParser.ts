@@ -3,6 +3,7 @@ export type Matra = { matra: string; number: number }
 export function parse(composition: string): Array<Array<Matra>> {
   const matras = composition
     .trim()
+    .replace(/-/g, '–')
     .split('\n')
     .map(line => line.trim().split(' '))
 
