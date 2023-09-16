@@ -1,9 +1,16 @@
+import { TaalMetadata } from '../taalMetadata'
+
 export type Matra = { matra: string; number: number }
 
-export function parse(composition: string): Array<Array<Matra>> {
+interface AdditionalInfo {
+  taal?: TaalMetadata
+}
+
+function parseVerbatim(composition: string): Array<Array<Matra>> {
   const matras = composition
     .trim()
     .replace(/-/g, '–')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
     .split('\n')
     .map(line => line.trim().split(' '))
 
@@ -23,6 +30,54 @@ export function parse(composition: string): Array<Array<Matra>> {
   }
 
   return result
+}
+
+function parseWithTaal(
+  composition: string,
+  taalMetadata: TaalMetadata
+): Array<Array<Matra>> {
+  const matras = composition
+    .replace(/-/g, '–')
+    .replace(/\s+/g, ' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .trim()
+    .split(' ')
+    .entries()
+
+  const result = []
+  let currentVibhagIndex = 0
+  let matraIndexInVibhag = 0
+  let currentMatraRow = []
+
+  for (const [matraNumber, matra] of matras) {
+    // 2 cases, first: matra can be pushed to current vibhag
+    // second: matra can be pushed to next vibhag
+    // assume indexes are within first case, then make sure they are updated to be within bounds for next iteration
+    currentMatraRow.push({ matra, number: matraNumber + 1 })
+    matraIndexInVibhag += 1
+
+    if (
+      matraIndexInVibhag === taalMetadata.matrasPerVibhag[currentVibhagIndex]
+    ) {
+      result.push(currentMatraRow)
+      currentMatraRow = []
+      matraIndexInVibhag = 0
+      currentVibhagIndex =
+        (currentVibhagIndex + 1) % taalMetadata.matrasPerVibhag.length
+    }
+  }
+
+  return result
+}
+
+export function parse(
+  composition: string,
+  additionalInfo?: AdditionalInfo
+): Array<Array<Matra>> {
+  if (additionalInfo?.taal !== undefined) {
+    return parseWithTaal(composition, additionalInfo.taal)
+  }
+  return parseVerbatim(composition)
 }
 
 export function parseVibhags(

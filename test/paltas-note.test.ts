@@ -38,4 +38,24 @@ describe('PaltaNote', () => {
       )
     ).to.deep.equal(['X', '2', '0', '3', 'X'])
   })
+
+  it('it should reflow the matra structure if the taal is specified', async () => {
+    const el = await fixture<PaltaNote>(
+      // prettier-ignore
+      `<palta-note taal="teental">
+        Dha Dhin Dhin Dha Dha Dhin Dhin Dha
+        Dha Tin Tin Ta
+        Ta Dhin Dhin Dha
+        Dha Dhin Dhin Dha
+      </palta-note>`
+    )
+
+    // get all the vibhag rows
+    const vibhagRows = el.shadowRoot?.querySelectorAll('tr')
+    expect(vibhagRows).to.exist
+    expect(vibhagRows?.length).to.equal(5)
+    expect(
+      Array.from(vibhagRows!).map(row => row.children.length)
+    ).to.deep.equal([5, 5, 5, 5, 5])
+  })
 })

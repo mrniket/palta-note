@@ -1,11 +1,12 @@
 import { FONT_FACES, FONT_FACES_ID } from './constants'
 import { Matra, parse, parseVibhags } from './parser/compositionParser'
+import { TAALS, TaalMetadata, Taal } from './taalMetadata'
 
 const rawStyles = `
 :host {
   display: block;
   color: black;
-  font-family: sans-serif;
+  font-family: 'Mooli', sans-serif;
   font-size: 1.2em;
   filter: invert(1);
   mix-blend-mode: difference;
@@ -21,7 +22,7 @@ tr {
 
 th {
   vertical-align: baseline;
-  font-family: 'Caveat', sans-serif;
+  font-family: 'Handlee', sans-serif;
   padding-right: 1em;
 }
 
@@ -64,8 +65,12 @@ td > div {
 export class PaltaNote extends HTMLElement {
   public vibhags?: string
 
+  public taal?: string
+
+  private taalMetadata?: TaalMetadata
+
   public static get observedAttributes(): string[] {
-    return ['vibhags']
+    return ['vibhags', 'taal']
   }
 
   public attributeChangedCallback(
@@ -75,6 +80,11 @@ export class PaltaNote extends HTMLElement {
   ): void {
     if (name === 'vibhags') {
       this.vibhags = newValue
+    } else if (name === 'taal') {
+      this.taal = newValue.toLowerCase()
+      if (this.taal in TAALS) {
+        this.taalMetadata = TAALS[this.taal as Taal]
+      }
     }
   }
 
@@ -102,9 +112,10 @@ export class PaltaNote extends HTMLElement {
   }
 
   connectedCallback(): void {
-    const matras = parse(this.textContent || '')
+    const matras = parse(this.textContent || '', { taal: this.taalMetadata })
+    const vibhags = this.vibhags ?? this.taalMetadata?.vibhagMarkers
     const container = document.createElement('div')
-    container.innerHTML = PaltaNote.render(matras, this.vibhags)
+    container.innerHTML = PaltaNote.render(matras, vibhags)
     this.shadowRoot?.append(container.children[0])
   }
 

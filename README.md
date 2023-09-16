@@ -27,6 +27,26 @@ The above should transform into:
 
 ![Screenshot of palta-note in action](./docs/screenshot.png)
 
+You can also specify the taal and it will make sure that the matras fit into the correct structure of the taal:
+
+```html
+<palta-note taal="teental">
+  Dha Dhin Dhin Dha Dha Dhin Dhin Dha
+  Dha Tin Tin Ta
+  Ta Dhin Dhin Dha
+</palta-note>
+```
+
+which will produce the same output as above.
+
+### Taals supported
+
+\<palta-note> currently supports:
+  - teental
+  - rupak
+  - ektaal
+  - jhaptaal
+
 ## Linting and formatting
 
 To scan the project for linting and formatting errors, run
