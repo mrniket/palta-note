@@ -5,11 +5,11 @@ Bhatkhande {
   
   matraRow = (matra | repeatMatras) + ("\n" | end)
   
-  matra = # (~multiplySymbol (letter | "-")) + " "?
+  matra = (~multiplySymbol (letter | "-")) + " "?
   
   Bol = upper lower *
   
-  repeatMatraRow = matra + multiplySymbol " "? digit ("\n" | end)
+  repeatMatraRow = (matra | repeatMatras) + multiplySymbol " "? digit ("\n" | end)
   
-  repeatMatras = "(" matra + ")" multiplySymbol digit " "?
+  repeatMatras = "(" (matra | repeatMatras) + ")" multiplySymbol digit " "?
 }

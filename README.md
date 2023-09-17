@@ -47,6 +47,30 @@ which will produce the same output as above.
   - ektaal
   - jhaptaal
 
+### Shorthands
+
+To save time with repeated matras or lines you can specify compositions like this:
+
+```html
+<palta-note taal="teental">
+  Dha Dhin Dhin Dha x2
+  Dha (Tin)x2 Ta
+  Ta Dhin Dhin Dha
+</palta-note>
+```
+
+This is equivalent to:
+
+```html
+<palta-note taal="teental">
+  Dha Dhin Dhin Dha
+  Dha Dhin Dhin Dha
+  Dha Tin Tin Ta
+  Ta Dhin Dhin Dha
+</palta-note>
+```
+
+
 ## Linting and formatting
 
 To scan the project for linting and formatting errors, run
