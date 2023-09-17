@@ -1,3 +1,4 @@
+import { describe, it } from 'bun:test'
 import { expect } from '@open-wc/testing'
 import { parse, parseVibhags } from '../src/parser/compositionParser'
 import { TAALS } from '../src/taalMetadata'
@@ -122,5 +123,34 @@ describe('CompositionParser', () => {
 
     const result = parse(composition, { taal: TAALS.teental })
     expect(result).to.deep.equal(expected)
+  })
+
+  it('can parse rupak through grammar', async () => {
+    const composition = `Tin Tin Na
+    (Dhin Na)x2`
+
+    const composition2 = `Tin Tin Na
+    Dhin Na x2`
+
+    const expected = [
+      [
+        { matra: 'Tin', number: 1 },
+        { matra: 'Tin', number: 2 },
+        { matra: 'Na', number: 3 },
+      ],
+      [
+        { matra: 'Dhin', number: 4 },
+        { matra: 'Na', number: 5 },
+      ],
+      [
+        { matra: 'Dhin', number: 6 },
+        { matra: 'Na', number: 7 },
+      ],
+    ]
+
+    const result = parse(composition, { taal: TAALS.rupak })
+    const result2 = parse(composition2, { taal: TAALS.rupak })
+    expect(result).to.deep.equal(expected)
+    expect(result2).to.deep.equal(expected)
   })
 })

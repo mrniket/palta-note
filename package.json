@@ -1,93 +1,59 @@
 {
   "name": "palta-note",
-  "description": "Webcomponent palta-note following open-wc recommendations",
-  "license": "MIT",
-  "author": "palta-note",
   "version": "1.0.3",
-  "type": "module",
-  "types": "./dist/src/index.d.ts",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "main": "./dist/palta-note.umd.js",
-  "module": "./dist/palta-note.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/palta-note.es.js",
-      "require": "./dist/palta-note.umd.js"
-    }
+  "author": "palta-note",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "dependencies": {
+    "ohm-js": "^17.1.0",
+    "typescript": "^5.2.2"
   },
-  "scripts": {
-    "analyze": "cem analyze --litelement",
-    "start": "tsc && vite dev --host",
-    "build": "tsc && npm run analyze -- --exclude dist && vite build",
-    "prepublish": "tsc && npm run analyze -- --exclude dist && vite build",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
-    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
-    "test": "tsc && wtr --coverage",
-    "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\""
-  },
-  "dependencies": {},
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@happy-dom/global-registrator": "^12.0.1",
+    "@ohm-js/cli": "^2.0.0",
     "@open-wc/eslint-config": "^9.2.1",
     "@open-wc/testing": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
     "@web/dev-server": "^0.1.34",
     "@web/test-runner": "^0.14.0",
+    "bun-types": "^1.0.2",
     "concurrently": "^5.3.0",
-    "eslint": "^8.31.0",
-    "eslint-config-prettier": "^8.3.0",
-    "husky": "^4.3.8",
-    "lint-staged": "^10.5.4",
     "lit": "^2.8.0",
     "prettier": "^2.4.1",
-    "tslib": "^2.3.1",
-    "typescript": "^4.5.2",
-    "vite": "^4.4.9",
-    "vite-plugin-dts": "^3.5.3"
+    "tslib": "^2.3.1"
   },
-  "customElements": "custom-elements.json",
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "extends": [
-      "@open-wc",
-      "prettier"
-    ],
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error"
-      ],
-      "import/no-unresolved": "off",
-      "import/extensions": [
-        "error",
-        {
-          "js": "never",
-          "ts": "never"
-        }
-      ]
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
     }
   },
+  "customElements": "custom-elements.json",
+  "description": "Webcomponent palta-note following open-wc recommendations",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "license": "MIT",
   "prettier": {
     "singleQuote": true,
     "arrowParens": "avoid",
     "semi": false
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "scripts": {
+    "analyze": "cem analyze --litelement",
+    "start": "concurrently -k -r \"bun run bunBuild --watch\" \"bunx --bun vite\"",
+    "build": "bun build ./src/index.ts --root=./src --outdir ./dist --format esm",
+    "prepublish": "tsc && npm run analyze -- --exclude dist && vite build",
+    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "test": "tsc && wtr --coverage --groups **/*.test.js",
+    "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
+    "generate": "ohm generateBundles --withTypes 'src/**/*.ohm'"
   },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
