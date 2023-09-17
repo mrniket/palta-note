@@ -5,7 +5,7 @@ Bhatkhande {
   
   matraRow = (matra | repeatMatras) + ("\n" | end)
   
-  matra = (~multiplySymbol (letter | "-")) + " "?
+  matra = (~multiplySymbol (letter | "-" | "'" | "’")) + " "?
   
   Bol = upper lower *
   
