@@ -1,12 +1,65 @@
+import { IterationNode, NonterminalNode } from 'ohm-js'
 import { TaalMetadata } from '../taalMetadata'
+// eslint-disable-next-line import/extensions
+import grammar, { BhatkhandeSemantics } from './composition.ohm-bundle.js'
 
-export type Matra = { matra: string; number: number }
+export type MatraInfo = { matra: string; number: number }
 
 interface AdditionalInfo {
   taal?: TaalMetadata
 }
 
-function parseVerbatim(composition: string): Array<Array<Matra>> {
+declare global {
+  interface Array<T> {
+    repeat(numTimes: number): Array<T>
+  }
+}
+
+/**
+ * Returns an array with the elements of this array repeated `numTimes` times.
+ */
+Array.prototype.repeat = function (this: any[], numTimes: number) {
+  return Array.from(
+    { length: numTimes * this.length },
+    (_, i) => this[i % this.length]
+  )
+}
+
+const CompositionParser: BhatkhandeSemantics = grammar.createSemantics()
+CompositionParser.addOperation<string>('eval()', {
+  Composition(node: NonterminalNode) {
+    return node.eval()
+  },
+  matra(bols: NonterminalNode, _space: NonterminalNode) {
+    return bols.sourceString
+  },
+  repeatMatras(
+    _leftBracket,
+    matras: IterationNode,
+    _rightBracket,
+    _timesSymbol,
+    times,
+    _endOfLine
+  ) {
+    const numTimes = parseInt(times.sourceString)
+    return matras.children
+      .map(matra => matra.eval())
+      .repeat(numTimes)
+      .join(' ')
+  },
+  repeatMatraRow(matraRow, _timesSymbol, _maybeSpace, times, _endOfLine) {
+    const numTimes = parseInt(times.sourceString)
+    return `${matraRow.eval()}\n`.repeat(numTimes)
+  },
+  matraRow(matras, _endOfLine) {
+    return matras.children.map(child => child.eval()).join(' ') + '\n'
+  },
+  _iter(...children) {
+    return children.map(child => child.eval()).join(' ')
+  },
+})
+
+function parseVerbatim(composition: string): Array<Array<MatraInfo>> {
   const matras = composition
     .trim()
     .replace(/-/g, '–')
@@ -35,7 +88,7 @@ function parseVerbatim(composition: string): Array<Array<Matra>> {
 function parseWithTaal(
   composition: string,
   taalMetadata: TaalMetadata
-): Array<Array<Matra>> {
+): Array<Array<MatraInfo>> {
   const matras = composition
     .replace(/-/g, '–')
     .replace(/\s+/g, ' ')
@@ -70,14 +123,20 @@ function parseWithTaal(
   return result
 }
 
+function expandComposition(composition: string): string {
+  const result = grammar.match(composition)
+  return CompositionParser(result).eval()
+}
+
 export function parse(
   composition: string,
   additionalInfo?: AdditionalInfo
-): Array<Array<Matra>> {
+): Array<Array<MatraInfo>> {
+  const expandedComposition = expandComposition(composition)
   if (additionalInfo?.taal !== undefined) {
-    return parseWithTaal(composition, additionalInfo.taal)
+    return parseWithTaal(expandedComposition, additionalInfo.taal)
   }
-  return parseVerbatim(composition)
+  return parseVerbatim(expandedComposition)
 }
 
 export function parseVibhags(

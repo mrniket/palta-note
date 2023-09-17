@@ -1,5 +1,5 @@
 import { FONT_FACES, FONT_FACES_ID } from './constants'
-import { Matra, parse, parseVibhags } from './parser/compositionParser'
+import { MatraInfo, parse, parseVibhags } from './parser/compositionParser'
 import { TAALS, TaalMetadata, Taal } from './taalMetadata'
 
 const rawStyles = `
@@ -131,7 +131,7 @@ export class PaltaNote extends HTMLElement {
   }
 
   public static render(
-    matras: Array<Array<Matra>>,
+    matras: MatraInfo[][],
     vibhags: string | undefined
   ): string {
     const vibhagMarkers = parseVibhags(vibhags)

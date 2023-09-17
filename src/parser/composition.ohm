@@ -1,0 +1,15 @@
+Bhatkhande {
+  Composition = (repeatMatraRow | matraRow) +
+  
+  multiplySymbol = ("x"|"*")
+  
+  matraRow = (matra | repeatMatras) + ("\n" | end)
+  
+  matra = # (~multiplySymbol (letter | "-")) + " "?
+  
+  Bol = upper lower *
+  
+  repeatMatraRow = matra + multiplySymbol " "? digit ("\n" | end)
+  
+  repeatMatras = "(" matra + ")" multiplySymbol digit " "?
+}
