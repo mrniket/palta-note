@@ -68,6 +68,7 @@ export class PaltaNote extends HTMLElement {
   public taal?: string
 
   private taalMetadata?: TaalMetadata
+  private rendered: boolean = false
 
   public static get observedAttributes(): string[] {
     return ['vibhags', 'taal']
@@ -112,11 +113,14 @@ export class PaltaNote extends HTMLElement {
   }
 
   connectedCallback(): void {
-    const matras = parse(this.textContent || '', { taal: this.taalMetadata })
-    const vibhags = this.vibhags ?? this.taalMetadata?.vibhagMarkers
-    const container = document.createElement('div')
-    container.innerHTML = PaltaNote.render(matras, vibhags)
-    this.shadowRoot?.append(container.children[0])
+    if (!this.rendered) {
+      const matras = parse(this.textContent || '', { taal: this.taalMetadata })
+      const vibhags = this.vibhags ?? this.taalMetadata?.vibhagMarkers
+      const container = document.createElement('div')
+      container.innerHTML = PaltaNote.render(matras, vibhags)
+      this.shadowRoot?.append(container.children[0])
+      this.rendered = true
+    }
   }
 
   public static renderVibhagMarker(

@@ -43,7 +43,7 @@
   },
   "scripts": {
     "analyze": "cem analyze --litelement",
-    "start": "concurrently -k -r \"bun run build --watch\" \"bunx --bun vite\"",
+    "start": "concurrently -k -r \"bun run build --watch\" \"bunx --bun vite\" \"bun run serveDev.ts\"",
     "build": "bun build ./src/index.ts --root=./src --outdir ./dist --format esm",
     "prepublish": "bun run build",
     "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
