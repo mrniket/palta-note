@@ -7,25 +7,32 @@ const rawStyles = `
   display: inline-block;
   color: black;
   font-family: 'Mooli', sans-serif;
-  font-size: clamp(0.69rem, 0.45rem + 1.20vw, 1.38rem);
+  font-size: clamp(0.56rem, 0.09rem + 2.00vw, 1.38rem);
   filter: invert(1);
   mix-blend-mode: difference;
+  width: 100%;
 }
 
 table {
-  border-spacing: clamp(0.63rem, 0.41rem + 1.09vw, 1.25rem) 15px;
+  border-spacing: clamp(0.31rem, -0.05rem + 1.54vw, 0.94rem) clamp(0.63rem, 0.44rem + 0.77vw, 0.94rem);
 }
 
-
+@media (max-width: 600px) {
+  table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 th {
   vertical-align: baseline;
   font-family: 'Handlee', sans-serif;
-  padding-right: 5px;
+  padding-right: 2px;
 }
 
 td {
   text-align: center;
+  vertical-align: baseline;
 }
 
 td > div {
@@ -36,16 +43,14 @@ td > div {
   content: '';
   margin-left: auto;
   margin-right: auto;
-  /* margin-left: calc(15% + 0.2em);
-    margin-right: calc(15% - 0.2em); */
   padding-right: 0.1em;
   display: block;
   position: relative;
   left: 0;
-  right: 10px;
+  right: clamp(0.31rem, 0.18rem + 0.58vw, 0.63rem);
   top: -0.3em;
   width: 70%;
-  height: 10px;
+  height: clamp(0.31rem, 0.18rem + 0.58vw, 0.63rem);
   border-radius: 50%;
   border-bottom: 2px solid black;
 }
