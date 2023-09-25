@@ -4,30 +4,27 @@ import { TAALS, TaalMetadata, Taal } from './taalMetadata'
 
 const rawStyles = `
 :host {
-  display: block;
+  display: inline-block;
   color: black;
   font-family: 'Mooli', sans-serif;
-  font-size: 1.2em;
+  font-size: clamp(0.69rem, 0.45rem + 1.20vw, 1.38rem);
   filter: invert(1);
   mix-blend-mode: difference;
 }
 
 table {
-  border-spacing: 1em 15px;
+  border-spacing: clamp(0.63rem, 0.41rem + 1.09vw, 1.25rem) 15px;
 }
 
-tr {
-  padding: 100px;
-}
+
 
 th {
   vertical-align: baseline;
   font-family: 'Handlee', sans-serif;
-  padding-right: 1em;
+  padding-right: 5px;
 }
 
 td {
-  min-width: 50px;
   text-align: center;
 }
 
