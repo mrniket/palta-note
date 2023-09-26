@@ -1,4 +1,5 @@
 import { FONT_FACES, FONT_FACES_ID } from './constants'
+import { shrinkFontIfNeeded } from './fontResizer'
 import { MatraInfo, parse, parseVibhags } from './parser/compositionParser'
 import { TAALS, TaalMetadata, Taal } from './taalMetadata'
 
@@ -7,7 +8,7 @@ const rawStyles = `
   display: inline-block;
   color: black;
   font-family: 'Mooli', sans-serif;
-  font-size: clamp(0.56rem, 0.09rem + 2.00vw, 1.38rem);
+  font-size: clamp(1.00rem, 0.80rem + 0.98vw, 1.56rem);
   filter: invert(1);
   mix-blend-mode: difference;
   width: 100%;
@@ -15,13 +16,6 @@ const rawStyles = `
 
 table {
   border-spacing: clamp(0.31rem, -0.05rem + 1.54vw, 0.94rem) clamp(0.63rem, 0.44rem + 0.77vw, 0.94rem);
-}
-
-@media (max-width: 600px) {
-  table {
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
 th {
@@ -33,10 +27,16 @@ th {
 td {
   text-align: center;
   vertical-align: baseline;
+  min-width: 12vw;
+  max-width: 300px;
 }
 
 td > div {
   display: inline-block;
+}
+
+.matra {
+  margin-right: auto;
 }
 
 .matra::after {
@@ -121,6 +121,7 @@ export class PaltaNote extends HTMLElement {
       const container = document.createElement('div')
       container.innerHTML = PaltaNote.render(matras, vibhags)
       this.shadowRoot?.append(container.children[0])
+      shrinkFontIfNeeded(this.shadowRoot!, Array.from(this.shadowRoot!.querySelectorAll('.matra')))
       this.rendered = true
     }
   }
